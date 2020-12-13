@@ -37,7 +37,6 @@ public class App {
       LOGGER.info("starting the game...");
       status = play.playGame();
     } catch (Exception e) {
-      // Catch-all exception
       LOGGER.error("exception occurred in the game", e);
       status = -1;
     }

@@ -10,8 +10,14 @@ public class RuleImpl implements Rule{
 
   @Override
   public int nextPosition(int currentPosition, int numberOnDice) {
-    // TODO Auto-generated method stub
-    return 0;
+    int nextPosition = currentPosition;
+    if(currentPosition > 0) {
+      int position = currentPosition + numberOnDice;
+      if(position <= 100) {
+        nextPosition = position;
+      }
+    }
+    return nextPosition;
   }
 
   @Override
