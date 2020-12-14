@@ -1,6 +1,7 @@
 package com.deserve.snakeladder.game.play;
 
 import com.deserve.snakeladder.game.base.Board;
+import com.deserve.snakeladder.game.base.State;
 import com.deserve.snakeladder.game.exception.GameNotAllowedException;
 import com.deserve.snakeladder.game.rules.RuleImpl;
 import org.slf4j.Logger;
@@ -22,7 +23,7 @@ public class Play {
   public Play(Board board) {
     super();
     this.board = board;
-    this.ruleImpl = new RuleImpl();
+    this.ruleImpl = new RuleImpl(this.board);
     this.isGameOver = false;
   }
   
@@ -43,21 +44,29 @@ public class Play {
     if(isGameOver) {
       throw new GameNotAllowedException("game is already over");
     }
+    //do not start until 6 comes
+    //boolean gameStarted = false;
+    /*while(!gameStarted && board.getDice().getNumberOnDice() != 6) {
+      board.getDice().throwDice();
+      totalSteps++;
+    }
+    LOGGER.debug("game started..");
+    gameStarted = true;
     board.getPlayer().setCurrentPosition(1);
+    */
+    //take the player to position 1
+    board.getPlayer().setCurrentPosition(1);
+    board.setState(State.AT_START);
+    
     while(!isGameOver) {
       board.getDice().throwDice();
       totalSteps++;
-      //do not start until 6 comes
-      /*while(!gameStarted && board.getDice().getNumberOnDice() != 6) {
-        LOGGER.debug("game started..");
-        gameStarted = true;
-        board.getDice().throwDice();
-        totalSteps++;
-      }*/
       int nextPosition = ruleImpl.nextPosition(board.getPlayer().getCurrentPosition(), board.getDice().getNumberOnDice());
       board.getPlayer().setCurrentPosition(nextPosition);
       LOGGER.info("current player is at postion: {}", board.getPlayer().getCurrentPosition());
+      
       if(board.getPlayer().getCurrentPosition() == 100) {
+        board.setState(State.AT_END);
         isGameOver = true;
         LOGGER.info("game over, totalSteps taken: {}", totalSteps);
         return 0;

@@ -9,6 +9,6 @@ package com.deserve.snakeladder.game.base;
  */
 public enum State {
 
-  AT_START, AT_END
+  NOT_STARTED, AT_START, AT_END
 
 }

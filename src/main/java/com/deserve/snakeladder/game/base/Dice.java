@@ -34,6 +34,6 @@ public class Dice {
     this.numberOnDice = (int) ((random* 6) + 1);
     LOGGER.info("number on dice: {}", numberOnDice);
   }
-  
+
 
 }

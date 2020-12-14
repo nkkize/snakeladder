@@ -10,6 +10,7 @@ package com.deserve.snakeladder.game.base;
 public class Tile {
 
   private int position;
+  private Snake snake;
 
   public Tile(int position) {
     super();
@@ -22,6 +23,14 @@ public class Tile {
 
   public void setPosition(int position) {
     this.position = position;
+  }
+
+  public Snake getSnake() {
+    return snake;
+  }
+
+  public void setSnake(Snake snake) {
+    this.snake = snake;
   }
 
 }

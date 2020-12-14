@@ -4,6 +4,7 @@
 package com.deserve.snakeladder.game.rules;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import com.deserve.snakeladder.game.base.Board;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -17,7 +18,8 @@ public class RuleImplTests {
   
   @BeforeEach
   public void initialize() {
-    ruleImpl = new RuleImpl();
+    Board board = new Board();
+    ruleImpl = new RuleImpl(board);
   }
   
   @Test
@@ -35,6 +37,14 @@ public class RuleImplTests {
     int numberOnDice = 6;
     int nextpostion = ruleImpl.nextPosition(currentPosition, numberOnDice);
     assertEquals(97, nextpostion);
+  }
+  
+  @Test
+  public void moveFromSnakesHeadToSnakesTailTest() {
+    int currentPosition = 8;
+    int numberOnDice = 6;
+    int nextpostion = ruleImpl.nextPosition(currentPosition, numberOnDice);
+    assertEquals(7, nextpostion);
   }
 
 }

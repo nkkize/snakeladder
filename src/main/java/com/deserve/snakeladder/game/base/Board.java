@@ -3,30 +3,37 @@
  */
 package com.deserve.snakeladder.game.base;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * @author narenderk
  *
  */
 public class Board {
+  private static final Logger LOGGER = LoggerFactory.getLogger(Board.class);
 
-  private Tile[][] tiles = new Tile[10][10];
+  private Tile[] tiles = new Tile[100];
   private Dice dice;
   // REVISIT: extend it to more than one player in future
   private Player player;
+  private State state;
 
   public Board() {
     super();
     createTiles();
+    createSnakes();
     this.dice = new Dice();
     // set the initial position to -1
     this.player = new Player(-1);
+    this.state = State.NOT_STARTED;
   }
 
-  public Tile[][] getTiles() {
+  public Tile[] getTiles() {
     return tiles;
   }
 
-  public void setTiles(Tile[][] tiles) {
+  public void setTiles(Tile[] tiles) {
     this.tiles = tiles;
   }
 
@@ -46,13 +53,32 @@ public class Board {
     this.player = player;
   }
 
+  public State getState() {
+    return state;
+  }
+
+  public void setState(State state) {
+    this.state = state;
+  }
+
   private void createTiles() {
-    int currentIndex = 0;
-    for (int i = 0; i < 10; i++) {
-      for (int j = 0; j < 10; j++) {
-        this.tiles[i][j] = new Tile(j + currentIndex + 1);
-      }
-      currentIndex = currentIndex + 10;
+    for (int i = 0; i < 100; i++) {
+      this.tiles[i] = new Tile(i+1);
     }
+  }
+  
+
+  private void createSnakes() {
+    Snake snake = new Snake(14, 7);
+    Tile tile = this.tiles[14];
+    tile.setSnake(snake);
+    
+    Snake snake2 = new Snake(32, 10);
+    Tile tile2 = this.tiles[32];
+    tile2.setSnake(snake2);
+    
+    //TODO: add more snakes
+    //TODO: create ransom number of snakes at random positions
+    
   }
 }
