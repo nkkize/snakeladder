@@ -52,10 +52,11 @@ public class Play {
     }
     LOGGER.debug("game started..");
     gameStarted = true;
+    //take the player to position 1 once 6 comes on dice
     board.getPlayer().setCurrentPosition(1);
     */
-    //take the player to position 1
-    board.getPlayer().setCurrentPosition(1);
+    //without the above rule, take the player to position 0
+    board.getPlayer().setCurrentPosition(0);
     board.setState(State.AT_START);
     
     while(!isGameOver) {
@@ -63,7 +64,7 @@ public class Play {
       totalSteps++;
       int nextPosition = ruleImpl.nextPosition(board.getPlayer().getCurrentPosition(), board.getDice().getNumberOnDice());
       board.getPlayer().setCurrentPosition(nextPosition);
-      LOGGER.info("current player is at postion: {}", board.getPlayer().getCurrentPosition());
+      LOGGER.debug("current player is at postion: {}", board.getPlayer().getCurrentPosition());
       
       if(board.getPlayer().getCurrentPosition() == 100) {
         board.setState(State.AT_END);
@@ -71,6 +72,7 @@ public class Play {
         LOGGER.info("game over, totalSteps taken: {}", totalSteps);
         return 0;
       }
+      
     }
     return -1;
   }

@@ -2,6 +2,7 @@ package com.deserve.snakeladder.game.play;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import com.deserve.snakeladder.game.base.Board;
+import com.deserve.snakeladder.game.base.Dice;
 import com.deserve.snakeladder.game.exception.GameNotAllowedException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -31,6 +32,17 @@ public class PlayTest {
   
   @Test
   public void gamePlayTest() throws GameNotAllowedException {
+    int status = play.playGame();
+    assertEquals(0, status);
+  }
+  
+  @Test
+  public void gamePlayCrookedDiceTest() throws GameNotAllowedException {
+    Board board = new Board();
+    Dice dice = new Dice();
+    dice.setCrooked(true);
+    board.setDice(dice);
+    play = new Play(board);
     int status = play.playGame();
     assertEquals(0, status);
   }

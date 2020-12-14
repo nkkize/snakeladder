@@ -44,7 +44,7 @@ public class RuleImplTests {
     int currentPosition = 8;
     int numberOnDice = 6;
     int nextpostion = ruleImpl.nextPosition(currentPosition, numberOnDice);
-    assertEquals(7, nextpostion);
+    assertEquals(8, nextpostion);
   }
 
 }

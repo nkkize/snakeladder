@@ -15,6 +15,7 @@ public class Dice {
 
   
   private int numberOnDice;
+  private boolean isCrooked;
 
   public Dice() {
     super();
@@ -29,10 +30,23 @@ public class Dice {
     this.numberOnDice = numberOnDice;
   }
   
+  public boolean isCrooked() {
+    return isCrooked;
+  }
+
+  public void setCrooked(boolean isCrooked) {
+    this.isCrooked = isCrooked;
+  }
+
   public void throwDice() {
     double random = Math.random();
-    this.numberOnDice = (int) ((random* 6) + 1);
-    LOGGER.info("number on dice: {}", numberOnDice);
+    int diceNumber = (int) ((random* 6) + 1);
+    if(isCrooked && diceNumber%2 !=0) {
+      //set even numbers
+      diceNumber++;
+    }
+    this.numberOnDice = diceNumber;
+    LOGGER.debug("number on dice: {}", numberOnDice);
   }
 
 

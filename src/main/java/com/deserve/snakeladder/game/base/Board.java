@@ -3,15 +3,11 @@
  */
 package com.deserve.snakeladder.game.base;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 /**
  * @author narenderk
  *
  */
 public class Board {
-  private static final Logger LOGGER = LoggerFactory.getLogger(Board.class);
 
   private Tile[] tiles = new Tile[100];
   private Dice dice;
@@ -69,7 +65,7 @@ public class Board {
   
 
   private void createSnakes() {
-    Snake snake = new Snake(14, 7);
+    Snake snake = new Snake(14, 8);
     Tile tile = this.tiles[14];
     tile.setSnake(snake);
     
