@@ -44,7 +44,7 @@ public class Play {
     if(isGameOver) {
       throw new GameNotAllowedException("game is already over");
     }
-    //do not start until 6 comes
+    //REVISIT: do not start until 6 comes
     //boolean gameStarted = false;
     /*while(!gameStarted && board.getDice().getNumberOnDice() != 6) {
       board.getDice().throwDice();
@@ -64,7 +64,7 @@ public class Play {
       totalSteps++;
       int nextPosition = ruleImpl.nextPosition(board.getPlayer().getCurrentPosition(), board.getDice().getNumberOnDice());
       board.getPlayer().setCurrentPosition(nextPosition);
-      LOGGER.debug("current player is at postion: {}", board.getPlayer().getCurrentPosition());
+      LOGGER.info("current player is at postion: {}", board.getPlayer().getCurrentPosition());
       
       if(board.getPlayer().getCurrentPosition() == 100) {
         board.setState(State.AT_END);

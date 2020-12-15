@@ -46,7 +46,7 @@ public class Dice {
       diceNumber++;
     }
     this.numberOnDice = diceNumber;
-    LOGGER.debug("number on dice: {}", numberOnDice);
+    LOGGER.info("number on dice: {}", numberOnDice);
   }
 
 
