@@ -46,5 +46,29 @@ public class RuleImplTests {
     int nextpostion = ruleImpl.nextPosition(currentPosition, numberOnDice);
     assertEquals(8, nextpostion);
   }
+  
+  @Test
+  public void biteGreenSnakeTest() {
+    int currentPosition = 50;
+    int numberOnDice = 2;
+    int nextpostion = ruleImpl.nextPosition(currentPosition, numberOnDice);
+    assertEquals(33, nextpostion);
+  }
+  
+  @Test
+  public void biteGreenSnakeOnceTest() {
+    int currentPosition = 50;
+    int numberOnDice = 2;
+    int nextpostion = ruleImpl.nextPosition(currentPosition, numberOnDice);
+    
+    
+    assertEquals(33, nextpostion); 
+    
+    
+    nextpostion = ruleImpl.nextPosition(50, 2);
+    assertEquals(52, nextpostion); 
+    
+    
+  }
 
 }

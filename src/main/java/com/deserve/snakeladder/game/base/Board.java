@@ -69,6 +69,10 @@ public class Board {
     Tile tile = this.tiles[14];
     tile.setSnake(snake);
     
+    Snake greenSnake = new GreenSnake(52, 33);
+    Tile greenSakeTile = this.tiles[52];
+    greenSakeTile.setSnake(greenSnake);
+    
     Snake snake2 = new Snake(32, 10);
     Tile tile2 = this.tiles[32];
     tile2.setSnake(snake2);

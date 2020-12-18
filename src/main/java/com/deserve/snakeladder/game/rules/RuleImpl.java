@@ -1,6 +1,7 @@
 package com.deserve.snakeladder.game.rules;
 
 import com.deserve.snakeladder.game.base.Board;
+import com.deserve.snakeladder.game.base.GreenSnake;
 import com.deserve.snakeladder.game.base.Player;
 import com.deserve.snakeladder.game.base.Snake;
 import com.deserve.snakeladder.game.base.Tile;
@@ -20,37 +21,43 @@ public class RuleImpl implements Rule{
     this.board = board;
   }
 
-  private boolean isSnakeAtPostion(int position) {
+  private int movePlayer(int position) {
+    int finaPosition = position;
     Tile tile = this.board.getTiles()[position];
     if(null != tile.getSnake()) {
-      return true;
-    }
-    return false;
-  }
 
-  private int hissAndGetFinalPosition(int position) {
-    Snake snake = this.board.getTiles()[position].getSnake();
-    return snake.getFinalPosition();
+      Snake snake = this.board.getTiles()[position].getSnake();
+      
+      if(snake instanceof GreenSnake ) {
+        GreenSnake greenSnake = (GreenSnake) snake;
+        if(greenSnake.hasBitten()) {
+         return finaPosition;
+        } else {
+          finaPosition = snake.getFinalPosition();
+          greenSnake.setBiteOnce(true);
+        }
+      }
+      finaPosition = snake.getFinalPosition();
+    }
+    
+    return finaPosition;
   }
   
   @Override
   public int nextPosition(int currentPosition, int numberOnDice) {
 
     int position = currentPosition + numberOnDice;
+    
     if (position == 100) {
       return position;
     }
 
     if (position < 100) {
-      boolean isSnake = isSnakeAtPostion(position);
-      if (isSnake) {
-        LOGGER.info("found snake at postion: {}", position);
-        return hissAndGetFinalPosition(position);
-      }
-      return position;
+      return movePlayer(position);
+    } else {
+      return currentPosition;
     }
-
-    return currentPosition;
+    
   }
 
   @Override
